@@ -1,15 +1,18 @@
 :root {
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
-    --background-color: #f8fafc;
-    --surface-color: #ffffff;
+    --primary-color: #4f46e5;
+    /* Indigo 600 */
+    --primary-light: #818cf8;
+    --primary-dark: #3730a3;
+    --accent-color: #f472b6;
+    /* Pink 400 */
+    --surface-glass: rgba(255, 255, 255, 0.7);
+    --surface-glass-strong: rgba(255, 255, 255, 0.9);
     --text-color: #1e293b;
-    --border-color: #e2e8f0;
+    --text-muted: #64748b;
+    --border-glass: rgba(255, 255, 255, 0.5);
+    --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     --success-color: #10b981;
     --danger-color: #ef4444;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
 }
 
 * {
@@ -19,11 +22,28 @@
 }
 
 body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    background-color: var(--background-color);
+    font-family: 'Outfit', 'Inter', system-ui, sans-serif;
     color: var(--text-color);
-    line-height: 1.5;
+    line-height: 1.6;
     min-height: 100vh;
+    /* Animated Gradient Background */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 a {
@@ -39,187 +59,290 @@ a {
 }
 
 header {
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     text-align: center;
+    padding: 2rem;
+    background: var(--surface-glass);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    border: 1px solid var(--border-glass);
+    box-shadow: var(--shadow-glass);
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 800;
-    color: var(--primary-dark);
+    background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     margin-bottom: 0.5rem;
     letter-spacing: -0.025em;
 }
 
-h2 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-}
-
 .subtitle {
-    color: #64748b;
-    font-size: 1.1rem;
+    color: var(--text-muted);
+    font-size: 1.25rem;
+    font-weight: 500;
 }
 
 /* Cards / Dashboard */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
 }
 
 .card {
-    background: var(--surface-color);
-    border-radius: 1rem;
-    padding: 2rem;
-    box-shadow: var(--shadow-md);
-    transition: transform 0.2s, box-shadow 0.2s;
-    border: 1px solid var(--border-color);
+    background: var(--surface-glass);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 1.5rem;
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow-glass);
+    border: 1px solid var(--border-glass);
     text-align: center;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-10px);
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.25);
+    background: var(--surface-glass-strong);
 }
 
 .card h3 {
-    color: var(--primary-color);
+    color: var(--primary-dark);
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.75rem;
+    font-weight: 700;
 }
 
 .card p {
-    color: #64748b;
+    color: var(--text-muted);
     margin-bottom: 2rem;
+    font-size: 1.05rem;
 }
 
+/* Buttons */
 .btn {
     display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary-color);
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     font-weight: 600;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
     border: none;
     cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.9rem;
 }
 
 .btn:hover {
-    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
+    filter: brightness(1.1);
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background: rgba(255, 255, 255, 0.8);
     color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: inline-block;
+    border: 1px solid var(--primary-light);
+    transition: all 0.3s;
 }
 
 .btn-secondary:hover {
-    background-color: #eff6ff;
+    background: white;
+    transform: translateX(-5px);
 }
 
 /* Forms */
-.form-group {
-    margin-bottom: 1rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: #475569;
-}
-
-.form-control {
+.form-control,
+.account-select,
+.table-input {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 0.75rem;
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.9);
 }
 
-.form-control:focus {
+.form-control:focus,
+.account-select:focus,
+.table-input:focus {
     outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    background: white;
 }
 
-/* Document Styles (KKO/KChO) */
+/* Document Styles (Paper Effect) */
 .document-container {
     background: white;
     padding: 2cm;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
     margin: 2rem auto;
-    max-width: 210mm; /* A4 width */
+    max-width: 210mm;
+    /* A4 width */
     min-height: 297mm;
-}
-
-.doc-header {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    border-bottom: 2px solid #000;
-    padding-bottom: 1rem;
-}
-
-.doc-title {
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.2rem;
-}
-
-/* Tables */
-.table-container {
-    overflow-x: auto;
+    position: relative;
+    /* Paper texture hint */
+    background-image: linear-gradient(to right, #fdfbfb, #ebedee 15%, #fdfbfb 15%, #fdfbfb 85%, #ebedee 85%);
+    /* Subtle spine effect */
+    background-size: 100% 100%;
+    /* Override gradient for simple clean paper */
     background: white;
-    border-radius: 1rem;
-    box-shadow: var(--shadow-md);
+    border-radius: 2px;
 }
 
-table {
+/* Specific overrides for inputs INSIDE the document visuals to make them look like "fields" but not too jarring */
+.document-container input,
+.document-container select {
+    font-family: 'Courier New', Courier, monospace;
+    /* Typewriter feel */
+    color: #000;
+    font-weight: bold;
+}
+
+.doc-input:focus,
+.table-input:focus {
+    background: rgba(254, 240, 138, 0.3);
+    /* Subtle yellow highlighter when focused */
+}
+
+
+/* KKO Specifics for CSS file to keep HTML clean */
+.kko-layout {
+    display: flex;
+    gap: 2mm;
+    border: 1px solid #ccc;
+    padding: 5mm;
+    min-height: 148mm;
+}
+
+.kko-main {
+    flex: 2;
+    padding-right: 5mm;
+    border-right: 2px dashed #999;
+}
+
+.kko-receipt {
+    flex: 1;
+    padding-left: 5mm;
+}
+
+.doc-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+    align-items: baseline;
+}
+
+.doc-label {
+    min-width: 120px;
+    font-size: 0.9rem;
+    font-family: "Times New Roman", serif;
+}
+
+.doc-input {
+    border: none;
+    border-bottom: 1px solid #000;
+    flex: 1;
+    padding: 0 0.5rem;
+    font-family: 'Courier New', monospace;
+    background: transparent;
+}
+
+/* Table Design inside Document */
+table.kko-table,
+table.cash-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9rem;
+    margin: 1rem 0;
 }
 
-th, td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--border-color);
+table.kko-table th,
+table.kko-table td,
+table.cash-table th,
+table.cash-table td {
+    border: 1px solid #000;
+    padding: 6px;
+    text-align: center;
+    font-family: "Times New Roman", serif;
 }
 
-th {
-    background-color: #f8fafc;
-    font-weight: 600;
-    color: #475569;
+table.cash-table th {
+    background-color: #f1f5f9;
 }
 
-/* Print Styles */
+/* Print Styles - CRITICAL: Reset everything to black & white plain paper */
 @media print {
     body {
-        background: white;
+        background: none;
         color: black;
+        animation: none;
     }
-    
-    .no-print {
+
+    .container {
+        padding: 0;
+        margin: 0;
+        max-width: none;
+    }
+
+    /* Hide UI elements */
+    .no-print,
+    header,
+    .btn,
+    .btn-secondary,
+    footer {
         display: none !important;
     }
 
+    /* Reset Document Container */
     .document-container {
         box-shadow: none;
         margin: 0;
         padding: 0;
         width: 100%;
         max-width: none;
+        border-radius: 0;
     }
-    
-    .container {
-        width: 100%;
-        max-width: none;
+
+    /* Reset Inputs */
+    input,
+    select {
+        border: none;
+        background: transparent !important;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
         padding: 0;
+    }
+
+    /* Ensure borders print */
+    table,
+    th,
+    td,
+    .kko-layout,
+    .kko-main {
+        border-color: #000 !important;
+    }
+
+    .doc-input {
+        border-bottom: none;
+        /* Often filled forms don't show the underline line if typed */
     }
 }
