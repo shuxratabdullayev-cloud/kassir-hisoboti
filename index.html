@@ -1,42 +1,67 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buxgalteriya Amaliyoti - O'quv Qo'llanma</title>
+    <title>Buxgalter - Kassa Hujjatlari</title>
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">
+            Buxgalter<span style="color:var(--primary)">.uz</span>
+        </a>
+        <div class="nav-links">
+            <a href="#features">Hujjatlar</a>
+            <a href="kko.html">Kirim</a>
+            <a href="kcho.html">Chiqim</a>
+            <a href="cashbook.html">Kitob</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <header>
-            <h1>O'zbekiston Buxgalteriya Amaliyoti</h1>
-            <p class="subtitle">Yangi boshlovchilar uchun kassa hujjatlarini to'ldirish bo'yicha onlayn o'quv platformasi</p>
-        </header>
+        <section class="hero">
+            <h1>Buxgalteriya Hujjatlarini <br><span>Oson va To'g'ri</span> O'rganing</h1>
+            <p>O'zbekiston standartlari asosida kassa hujjatlarini to'ldirish, hisoblash va chop etish uchun eng qulay
+                onlayn platforma.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center;">
+                <a href="#features" class="btn btn-primary">Boshlash</a>
+                <a href="https://github.com/shuxratabdullayev-cloud" class="btn btn-secondary"
+                    target="_blank">GitHub</a>
+            </div>
+        </section>
 
-        <main class="grid">
-            <div class="card">
-                <h3>Kassa Kirim Orderi (KKO-1)</h3>
-                <p>Pul mablag'larini kassaga qabul qilish hujjatini to'ldirishni o'rganing. Kvitantsiya bilan birga.</p>
-                <a href="kko.html" class="btn">Hujjatni to'ldirish</a>
+        <section id="features" class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">📥</div>
+                <h3>Kassa Kirim Orderi</h3>
+                <p>Moliya vazirligi tasdiqlagan KO-1 shaklidagi hujjat. Kirim orderi va kvitantsiyani bir vaqtda
+                    to'ldiring.</p>
+                <a href="kko.html" class="card-link">Hujjatni to'ldirish →</a>
             </div>
 
-            <div class="card">
-                <h3>Kassa Chiqim Orderi (KChO-2)</h3>
-                <p>Kassadan pul mablag'larini berish hujjatini rasmiylashtirishni o'rganing.</p>
-                <a href="kcho.html" class="btn">Hujjatni to'ldirish</a>
+            <div class="feature-card">
+                <div class="feature-icon">📤</div>
+                <h3>Kassa Chiqim Orderi</h3>
+                <p>KO-2 shaklidagi chiqim kassa orderi. Ish haqi, xizmat safari va boshqa to'lovlar uchun.</p>
+                <a href="kcho.html" class="card-link">Hujjatni to'ldirish →</a>
             </div>
 
-            <div class="card">
+            <div class="feature-card">
+                <div class="feature-icon">📒</div>
                 <h3>Kassa Kitobi</h3>
-                <p>Kunlik kassa operatsiyalarini hisobga olish va qoldiqni chiqarishni o'rganing.</p>
-                <a href="cashbook.html" class="btn">Kitobni yuritish</a>
+                <p>Kunlik kassa hisobotini (KO-4) avtomatik hisoblash. Qoldiqni aniqlash va xatolarni oldini olish.</p>
+                <a href="cashbook.html" class="card-link">Hisobotni yuritish →</a>
             </div>
-        </main>
+        </section>
 
-        <footer style="margin-top: 4rem; text-align: center; color: #64748b;">
-            <p>© 2024 Buxgalteriya O'quv Markazi. Ochiq manbali loyiha.</p>
+        <footer
+            style="margin-top: 6rem; text-align: center; color: #94a3b8; padding: 2rem; border-top: 1px solid var(--border);">
+            <p>© 2024 Buxgalter.uz. O'quv maqsadida foydalanish uchun.</p>
         </footer>
     </div>
 </body>
+
 </html>

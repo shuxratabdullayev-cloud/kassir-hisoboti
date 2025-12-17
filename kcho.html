@@ -6,115 +6,98 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kassa Chiqim Orderi - KO-2</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* KChO Specifics */
-        .kcho-form {
-            max-width: 180mm;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 10mm;
-            min-height: 140mm;
-        }
-
-        @media print {
-            .kcho-form {
-                border: none;
-                padding: 0;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <nav class="navbar no-print">
+        <a href="index.html" class="logo">Buxgalter.uz</a>
+        <div class="nav-links">
+            <a href="index.html">Bosh sahifa</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <header class="no-print">
-            <a href="index.html" class="btn-secondary">← Bosh sahifaga qaytish</a>
-            <h1>Kassa Chiqim Orderi (KO-2)</h1>
-            <button onclick="window.print()" class="btn">Chop etish / PDF</button>
-        </header>
+        <div class="no-print"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div>
+                <a href="index.html" class="btn-back">← Ortga qaytish</a>
+                <h2>Kassa Chiqim Orderi (KO-2)</h2>
+            </div>
+            <button onclick="window.print()" class="btn btn-primary">🖨️ Chop etish / PDF</button>
+        </div>
 
-        <div class="document-container">
-            <div class="kcho-form">
-                <div style="text-align: center; margin-bottom: 2rem;">
+        <div class="paper-wrapper">
+            <div class="document-container" style="padding: 2cm;">
+                <div class="text-center" style="margin-bottom: 2rem;">
                     <input type="text" class="doc-input" placeholder="Tashkilot nomi"
-                        style="text-align: center; width: 100%; font-weight: bold;">
+                        style="text-align: center; font-weight: bold; font-size: 1.1rem;">
                 </div>
 
-                <h3 style="text-align: center;">KASSA CHIQIM ORDERI № <input type="text" class="doc-input"
-                        style="width: 50px;"></h3>
-                <div style="text-align: center;">
-                    <input type="date" class="doc-input" style="width: 140px;" id="docDate">
+                <h1 class="doc-title">KASSA CHIQIM ORDERI № <input type="text" class="doc-input" style="width: 60px;">
+                </h1>
+                <div class="text-center" style="margin-bottom: 2rem;">
+                    <input type="date" class="doc-input" style="width: 150px;" id="docDate">
                 </div>
 
-                <table class="kko-table">
+                <table class="sheet">
                     <thead>
                         <tr>
-                            <th rowspan="2">Korrespondensiyalanuvchi schyot, subschyot</th>
-                            <th rowspan="2">Kod (Analitik hisob)</th>
+                            <th rowspan="2">Korrespondensiya (Debet)</th>
+                            <th rowspan="2">Kod</th>
                             <th rowspan="2">Summa</th>
-                            <th rowspan="2">Maqsadli belgilanish kodi</th>
-                            <th></th>
+                            <th>Maqsad</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>
                                 <select class="account-select" id="debitAccount">
-                                    <option value="">Debet schyotni tanlang</option>
+                                    <option value="">Tanlang...</option>
                                 </select>
                             </td>
                             <td><input type="text" class="table-input" placeholder="Kod"></td>
                             <td><input type="number" class="table-input" id="amount" placeholder="0.00"></td>
-                            <td><input type="text" class="table-input"></td>
-                            <td></td>
+                            <td><input type="text" class="table-input" placeholder="..."></td>
                         </tr>
                     </tbody>
                 </table>
 
-                <div class="doc-row">
-                    <span class="doc-label">Kimga berildi:</span>
-                    <input type="text" class="doc-input" placeholder="F.I.O">
-                </div>
-                <div class="doc-row">
-                    <span class="doc-label">Asos:</span>
-                    <input type="text" class="doc-input" placeholder="To'lov maqsadi">
-                </div>
-                <div class="doc-row">
-                    <span class="doc-label">Summa (so'z bilan):</span>
-                    <input type="text" class="doc-input" id="amountText" readonly>
-                </div>
-                <div class="doc-row">
-                    <span class="doc-label">Ilova:</span>
-                    <input type="text" class="doc-input" placeholder="Pasport ma'lumotlari va h.k.">
+                <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem;">
+                    <div class="flex-between">
+                        <span style="width: 150px;">Kimga berildi:</span>
+                        <input type="text" class="doc-input" placeholder="F.I.O">
+                    </div>
+                    <div class="flex-between">
+                        <span style="width: 150px;">Asos:</span>
+                        <input type="text" class="doc-input" placeholder="To'lov maqsadi">
+                    </div>
+                    <div class="flex-between">
+                        <span style="width: 150px;">Summa (so'z):</span>
+                        <input type="text" class="doc-input" id="amountText" readonly>
+                    </div>
+                    <div class="flex-between">
+                        <span style="width: 150px;">Ilova:</span>
+                        <input type="text" class="doc-input" placeholder="Pasport seriya/raqam">
+                    </div>
                 </div>
 
                 <div style="margin-top: 3rem; display: flex; justify-content: space-between;">
-                    <div>
-                        <span style="display: block;">Rahbar</span>
-                        <br>
-                        _________________
-                    </div>
-                    <div>
-                        <span style="display: block;">Bosh buxgalter</span>
-                        <br>
-                        _________________
+                    <div class="text-center">Rahbar<br><br>_________________</div>
+                    <div class="text-center">Bosh buxgalter<br><br>_________________</div>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px dotted #ccc;">
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Oldim: </strong> <input type="text" class="doc-input" style="width: 80%;">
+                    </p>
+                    <div class="flex-between" style="gap: 2rem;">
+                        <span>Sana: ______________________</span>
+                        <span>Imzo: ______________________</span>
                     </div>
                 </div>
 
-                <div style="margin-top: 2rem;">
-                    <span class="doc-label">Oldim (so'z bilan):</span> <br>
-                    <input type="text" class="doc-input" style="width: 100%;">
-                    <br><br>
-                    <div style="display: flex; gap: 2rem; align-items: center;">
-                        <span>Sana: ______________</span>
-                        <span>Imzo: ______________</span>
-                    </div>
-                </div>
-
-                <div style="margin-top: 2rem;">
-                    <span style="display: block;">Kassir</span>
-                    <br>
-                    _________________
+                <div style="margin-top: 2rem; text-align: center;">
+                    Kassir<br><br>_________________
                 </div>
             </div>
         </div>

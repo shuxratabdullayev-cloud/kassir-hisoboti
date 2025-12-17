@@ -6,233 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kassa Kirim Orderi - KO-1</title>
     <link rel="stylesheet" href="css/styles.css">
-    <style>
-        /* Specific styles for KKO Form authenticity */
-        .kko-layout {
-            display: flex;
-            gap: 2mm;
-            /* Perforation line */
-            border: 1px solid #ccc;
-            padding: 5mm;
-            min-height: 148mm;
-            /* A5 height approx or half A4 */
-        }
-
-        .kko-main {
-            flex: 2;
-            padding-right: 5mm;
-            border-right: 2px dashed #999;
-            /* Perforation */
-        }
-
-        .kko-receipt {
-            flex: 1;
-            padding-left: 5mm;
-        }
-
-        .doc-row {
-            display: flex;
-            margin-bottom: 0.5rem;
-            align-items: baseline;
-        }
-
-        .doc-label {
-            min-width: 120px;
-            font-size: 0.9rem;
-        }
-
-        .doc-input {
-            border: none;
-            border-bottom: 1px solid #000;
-            flex: 1;
-            padding: 0 0.5rem;
-            font-family: inherit;
-            background: rgba(255, 255, 0, 0.05);
-            /* Slight highlight for inputs */
-        }
-
-        .doc-input:focus {
-            outline: none;
-            background: rgba(255, 255, 0, 0.2);
-        }
-
-        .table-input {
-            width: 100%;
-            border: none;
-            background: transparent;
-            text-align: center;
-        }
-
-        .account-select {
-            border: none;
-            background: transparent;
-            width: 100%;
-            font-size: 0.9rem;
-        }
-
-        table.kko-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            margin: 1rem 0;
-        }
-
-        table.kko-table th,
-        table.kko-table td {
-            border: 1px solid #000;
-            padding: 4px;
-            text-align: center;
-        }
-
-        @media print {
-            body {
-                padding: 0;
-                margin: 0;
-            }
-
-            .container>header,
-            .no-print {
-                display: none;
-            }
-
-            .document-container {
-                border: none;
-                box-shadow: none;
-                padding: 0;
-                margin: 0 auto;
-                width: 100%;
-            }
-
-            .doc-input {
-                border-bottom: none;
-                /* Hide lines if filling, or keep them? Usually kept for form look */
-                background: transparent;
-            }
-
-            .kko-layout {
-                border: none;
-            }
-
-            /* Hide select arrow */
-            select {
-                appearance: none;
-                -webkit-appearance: none;
-            }
-        }
-    </style>
 </head>
 
 <body>
+    <nav class="navbar no-print">
+        <a href="index.html" class="logo">Buxgalter.uz</a>
+        <div class="nav-links">
+            <a href="index.html">Bosh sahifa</a>
+        </div>
+    </nav>
+
     <div class="container">
-        <header class="no-print">
-            <a href="index.html" class="btn-secondary">← Bosh sahifaga qaytish</a>
-            <h1>Kassa Kirim Orderi (KO-1)</h1>
-            <button onclick="window.print()" class="btn">Chop etish / PDF</button>
-        </header>
+        <div class="no-print"
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div>
+                <a href="index.html" class="btn-back">← Ortga qaytish</a>
+                <h2>Kassa Kirim Orderi (KO-1)</h2>
+            </div>
+            <button onclick="window.print()" class="btn btn-primary">🖨️ Chop etish / PDF</button>
+        </div>
 
-        <div class="document-container">
-            <div class="kko-layout" id="kko-form">
-                <!-- Left Side: Order -->
-                <div class="kko-main">
-                    <div style="text-align: center; margin-bottom: 1rem;">
-                        <input type="text" class="doc-input" placeholder="Tashkilot nomi"
-                            style="text-align: center; width: 100%; font-weight: bold;">
-                    </div>
-                    <h3 style="text-align: center;">KASSA KIRIM ORDERI № <input type="text" class="doc-input"
-                            style="width: 50px;" id="orderNum"></h3>
-                    <div style="text-align: center; font-size: 0.9rem;">
-                        <input type="date" class="doc-input" style="width: 140px;" id="docDate">
-                    </div>
-
-                    <table class="kko-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Korrespondensiyalanuvchi schyot, subschyot</th>
-                                <th rowspan="2">Kod (Analitik hisob)</th>
-                                <th rowspan="2">Summa</th>
-                                <th rowspan="2">Maqsadli belgilanish kodi</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select class="account-select" id="creditAccount">
-                                        <option value="">Kredit schyotni tanlang</option>
-                                    </select>
-                                </td>
-                                <td><input type="text" class="table-input" placeholder="Kod"></td>
-                                <td><input type="number" class="table-input" id="amount" placeholder="0.00"></td>
-                                <td><input type="text" class="table-input"></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div class="doc-row">
-                        <span class="doc-label">Kimdan qabul qilindi:</span>
-                        <input type="text" class="doc-input" id="payer" placeholder="F.I.O yoki tashkilot">
-                    </div>
-                    <div class="doc-row">
-                        <span class="doc-label">Asos:</span>
-                        <input type="text" class="doc-input" id="basis" placeholder="To'lov maqsadi">
-                    </div>
-                    <div class="doc-row">
-                        <span class="doc-label">Summa (so'z bilan):</span>
-                        <input type="text" class="doc-input" id="amountText" readonly placeholder="Avtomatik yoziladi">
-                    </div>
-                    <div class="doc-row">
-                        <span class="doc-label">Ilova:</span>
-                        <input type="text" class="doc-input" id="attachment">
-                    </div>
-
-                    <div style="margin-top: 2rem; display: flex; justify-content: space-between;">
-                        <div>
-                            <span style="display: block;">Bosh buxgalter</span>
-                            <br>
-                            _________________
+        <div class="paper-wrapper">
+            <div class="document-container">
+                <!-- DOCUMENT CONTENT STARTS -->
+                <div class="kko-grid">
+                    <!-- Left: ORDER -->
+                    <div style="padding-right: 1rem;">
+                        <div class="text-center" style="margin-bottom: 2rem;">
+                            <input type="text" class="doc-input" placeholder="Tashkilot nomi"
+                                style="text-align: center; font-weight: bold;">
                         </div>
-                        <div>
-                            <span style="display: block;">Kassir</span>
+                        <h1 class="doc-title">KASSA KIRIM ORDERI № <input type="text" class="doc-input"
+                                style="width: 50px;" id="orderNum"></h1>
+                        <div class="text-center">
+                            <input type="date" class="doc-input" style="width: 140px;" id="docDate">
+                        </div>
+
+                        <table class="sheet">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">Korrespondensiya schyoti</th>
+                                    <th rowspan="2">Kod</th>
+                                    <th rowspan="2">Summa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select class="account-select" id="creditAccount">
+                                            <option value="">Tanlang...</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="text" class="table-input" placeholder="000"></td>
+                                    <td><input type="number" class="table-input" id="amount" placeholder="0.00"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div class="flex-between">
+                                <span style="min-width: 120px;">Kimdan olindi:</span>
+                                <input type="text" class="doc-input" id="payer">
+                            </div>
+                            <div class="flex-between">
+                                <span style="min-width: 120px;">Asos:</span>
+                                <input type="text" class="doc-input" id="basis">
+                            </div>
+                            <div class="flex-between">
+                                <span style="min-width: 120px;">Summa (so'z):</span>
+                                <input type="text" class="doc-input" id="amountText" readonly>
+                            </div>
+                            <div class="flex-between">
+                                <span style="min-width: 120px;">Ilova:</span>
+                                <input type="text" class="doc-input" id="attachment">
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 3rem; display: flex; justify-content: space-between;">
+                            <div class="text-center">
+                                Bosh buxgalter<br><br>_________________
+                            </div>
+                            <div class="text-center">
+                                Kassir<br><br>_________________
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Separator -->
+                    <div class="separator"></div>
+
+                    <!-- Right: RECEIPT -->
+                    <div style="padding-left: 1rem;">
+                        <h1 class="doc-title">KVITANTSIYA</h1>
+                        <p class="text-center" style="font-size: 0.8rem;">Kirim orderiga</p>
+                        <div class="text-center" style="margin: 1rem 0;">
+                            № <span id="receiptNumDisplay" style="font-weight: bold;">___</span>
+                            (<span id="receiptDateDisplay"></span>)
+                        </div>
+
+                        <div style="display: flex; flex-direction: column; gap: 1rem;">
+                            <div>
+                                <span style="font-size: 0.8rem; color: #666;">Kimdan:</span>
+                                <div style="border-bottom: 1px solid #000; min-height: 1.2em;" id="receiptPayer"></div>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.8rem; color: #666;">Asos:</span>
+                                <div style="border-bottom: 1px solid #000; min-height: 1.2em;" id="receiptBasis"></div>
+                            </div>
+                            <div>
+                                <span style="font-size: 0.8rem; color: #666;">Summa:</span>
+                                <div style="border-bottom: 1px solid #000; min-height: 1.2em; font-weight: bold;"
+                                    id="receiptAmount"></div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 4rem; text-align: center;">
+                            <div
+                                style="border: 2px solid #000; width: 80px; height: 80px; margin: 0 auto; display:flex; align-items:center; justify-content:center; border-radius: 50%; color: #999;">
+                                M.O'.</div>
                             <br>
-                            _________________
+                            Kassir<br>_________________
                         </div>
                     </div>
                 </div>
-
-                <!-- Right Side: Receipt (Kvitantsiya) -->
-                <div class="kko-receipt">
-                    <h3 style="text-align: center;">KVITANTSIYA</h3>
-                    <p style="text-align: center; font-size: 0.8rem;">Kirim kassa orderiga</p>
-                    <div style="text-align: center; margin-bottom: 1rem;">
-                        № <span id="receiptNumDisplay">___</span> <br>
-                        <span id="receiptDateDisplay">___.___.20__</span>
-                    </div>
-
-                    <div class="doc-row" style="flex-direction: column;">
-                        <span class="doc-label">Kimdan qabul qilindi:</span>
-                        <span style="border-bottom: 1px solid #000; display: block; min-height: 20px;"
-                            id="receiptPayer"></span>
-                    </div>
-                    <div class="doc-row" style="flex-direction: column; margin-top: 0.5rem;">
-                        <span class="doc-label">Asos:</span>
-                        <span style="border-bottom: 1px solid #000; display: block; min-height: 20px;"
-                            id="receiptBasis"></span>
-                    </div>
-
-                    <div class="doc-row" style="margin-top: 1rem;">
-                        <span class="doc-label">Summa:</span>
-                        <span style="font-weight: bold;" id="receiptAmount">0.00</span>
-                    </div>
-
-                    <div style="margin-top: 3rem;">
-                        <span style="display: block;">M.O'.</span>
-                        <br><br>
-                        <span style="display: block;">Bosh buxgalter ____________</span>
-                        <br><br>
-                        <span style="display: block;">Kassir ____________</span>
-                    </div>
-                </div>
+                <!-- DOCUMENT CONTENT ENDS -->
             </div>
         </div>
     </div>
